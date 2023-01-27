@@ -1,8 +1,24 @@
 version: "3.3"
+
 services:
 
+  app:
+    image: python:3.8.10
+    container_name: aplicacao
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: "python src/main.py"
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+
   mongo:
-    image: mongo
+    image: mongo:latest
     container_name: banco
     restart: unless-stopped
     environment:
@@ -10,3 +26,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     env_file:
       - metabase/config/mongo_exemple.env
+    volumes:
+      - .:/data
+    ports:
+      - "27017:27017"
