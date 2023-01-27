@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+
+  mongo:
+    image: mongo
+    container_name: banco
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    env_file:
+      - metabase/config/mongo_exemple.env

@@ -1,0 +1,6 @@
+metabase/config/
+.coverage
+data/.coverage
+tests/.coverage
+env/
+.pytest_cache/
